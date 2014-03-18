@@ -1,12 +1,12 @@
-Table for two
--------------
+crmsh pcs cheatsheet
+--------------------
 
 <table>
   <tr>
-    <th>ID</th><th>Name</th><th>Rank</th><th>Notes></th>
+    <th>Function</th><th>crmsh</th><th>pcs</th><th>Notes</th>
   </tr>
   <tr>
-    <td>1</td><td>Tom Preston-Werner</td><td>Awesome</td>
+    <td>something</td>`if code then kill`<td></td><td>`yum yum`</td><td>something else</td>
   </tr>
   <tr>
     <td>2</td><td>Albert Einstein</td><td>Nearly as awesome</td>
