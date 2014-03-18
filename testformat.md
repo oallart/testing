@@ -15,7 +15,9 @@ create resources | `crm configure primitive ClusterIP ocf:heartbeat:IPaddr2 \ ` 
 show resources | `crm resource show` | `pcs resource show` | A last argument (resource name) can be supplied. crm also shows fencing resources. 
 show fencing resources | `crm resource show` | `pcs stonith show` |
 modify resources | `crm resource param ClusterIP set clusterip_hash=sourceip` | `pcs resource update ClusterIP clusterip_hash=sourceip` `pcs resource update ClusterIP ip=192.168.0.98 nic=` |
-control resources |
-delete resources |
-show resource defaults |
-set resource op defaults |
+control resources | `crm resource start <resource>` <br> `crm resource stop <resource>` | `pcs resource enable <resource>` <br> `pcs resource disable <resource>` |
+delete resources | `crm resource delete <resource>` | `pcs resource delete <resource>` |
+show resource defaults | `crm configure show type:rsc_defaults` <br> `crm configure show type:op_defaults` | `pcs resource defaults` <br> `pcs resource op defaults` | git table erroneously list rsc for pcs 
+set resource op defaults | `crm configure op_defaults timeout=240s` | `pcs resource op defaults timeout=240s` |
+list constraints | none - closest is `crm configure show` | `pcs constraint` | Apart from groups, crmsh does not interpret constraints and therefore knows nothing about resource dependencies.
+set colocation | `crm configure colocation <name_id> INFINITY: <resource1> <resource2>` | `pcs constraint colocation add <resource2> with <resource1> INFINITY` |     
