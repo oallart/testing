@@ -5,5 +5,4 @@ Function | crmsh | pcs | notes
 --- | --- | --- | ---
 list cib | `crm configure show` | |
 list cib as XML | `crm configure show xml` | pcs cluster cib |
-show status | ```bash
-crm status `crm_mon -1` | `pcs status` |
+show status | `crm status` <br> `crm_mon -1` | `pcs status` |
