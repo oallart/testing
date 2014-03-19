@@ -5,9 +5,11 @@
 - [Display the configuration](#display-the-configuration)
 - [Display the current status](#display-the-current-status)
 - [Node standby](#node-standby)
-- [Setting configuration options](#setting-configuration-options)
-- [Listing available resources](#listing-available-resources)
-- [Creating a resource](#creating-a-resource)
+- [Set cluster property](#set-cluster-property)
+- [List Resource Agent (RA) classes](#list-resource-agent-ra-classes)
+- [List available RAs](#list-available-ras)
+- [List RA info](#list-ra-info)
+- [Create a resource](#create-a-resource)
 - [Display a resource](#display-a-resource)
 - [Start a resource](#start-a-resource)
 - [Stop a resource](#stop-a-resource)
@@ -28,36 +30,74 @@
 
 ## Display the configuration
 
-    crmsh # crm configure show
+    crmsh # crm configure show xml
     pcs   # pcs cluster cib
+
+crmsh can show a simplified (non-xml) syntax as well
+
+    crmsh # crm configure show
     
 ## Display the current status
 
     crmsh # crm status
     pcs   # pcs status
 
+also
+
+    # crm_mon -1
+
 ## Node standby
 
-    crmsh # crm node standby
+Put node in standby
+
+    crmsh # crm node standby pcmk-1
     pcs   # pcs cluster standby pcmk-1
 
-    crmsh # crm node online
+Remove node from standby
+
+    crmsh # crm node online pcmk-1
     pcs   # pcs cluster unstandby pcmk-1
 
-## Setting configuration options
+crm has the ability to set the status on reboot or forever. 
+pcs can apply the change to all the nodes.
+
+## Set cluster property
 
     crmsh # crm configure property stonith-enabled=false
     pcs   # pcs property set stonith-enabled=false
 
-## Listing available resources
+## List Resource Agent (RA) classes
 
     crmsh # crm ra classes
     pcs   # pcs resource standards
 
+## List available RAs
+
+    crmsh # crm ra list ocf
+    crmsh # crm ra list lsb
+    crmsh # crm ra list service
+    crmsh # crm ra list stonith
+    pcs   # pcs resource agents ocf
+    pcs   # pcs resource agents lsb
+    pcs   # pcs resource agents service
+    pcs   # pcs resource agents stonith
+    pcs   # pcs resource agents
+
     crmsh # crm ra list ocf pacemaker
     pcs   # pcs resource agents ocf:pacemaker
 
-## Creating a resource
+## List RA info
+
+    crmsh # crm ra meta IPaddr2
+    pcs   # pcs resource agent IPaddr2
+
+Use any RA name (like IPaddr2) from the list displayed with the previous command
+You can also use the full class:provider:RA format if multiple RAs with the same name are available :
+
+    crmsh # crm ra meta ocf:heartbeat:IPaddr2
+    pcs   # pcs resource agent ocf:heartbeat:IPaddr2
+
+## Create a resource
 
     crmsh # crm configure primitive ClusterIP ocf:heartbeat:IPaddr2 \
             params ip=192.168.122.120 cidr_netmask=32 \
