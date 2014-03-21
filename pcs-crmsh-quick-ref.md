@@ -106,7 +106,7 @@ Use any RA name (like IPaddr2) from the list displayed with the previous command
 You can also use the full class:provider:RA format if multiple RAs with the same name are available :
 
     crmsh # crm ra meta ocf:heartbeat:IPaddr2
-    pcs   # pcs resource agent ocf:heartbeat:IPaddr2
+    pcs   # pcs resource describe ocf:heartbeat:IPaddr2
 
 ## Create a resource
 
@@ -135,6 +135,13 @@ crmsh also displays fencing resources.
 
     crmsh # crm resource show
     pcs   # pcs stonith show
+
+pcs treats STONITH devices separately.
+
+## Display Stonith RA info
+
+    crmsh # crm ra meta stonith:fence_ipmilan
+    pcs   # pcs stonith describe fence_ipmilan
 
 ## Start a resource
 
